@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chem Lab Safety Agreement</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 40px; background: #f4f4f4; color: #333; }
+    .container { background: white; padding: 30px; border-radius: 8px; max-width: 800px; margin: 0 auto 30px auto; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    h1 { color: #111; margin-top: 0; }
+    h2 { color: #222; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 30px; }
+    h3 { margin-top: 20px; color: #444; }
+    ul { padding-left: 20px; }
+    li { margin: 8px 0; }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Form Styling */
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; }
+    input[type="text"], input[type="password"] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    .checkbox-group { margin-bottom: 10px; display: flex; align-items: flex-start; }
+    .checkbox-group input { margin-right: 10px; margin-top: 4px; }
+    .radio-group { margin-bottom: 10px; }
+    .radio-group label { font-weight: normal; display: block; margin-bottom: 5px; cursor: pointer; }
+
+    /* Buttons */
+    .btn { background: #0066cc; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    .btn:hover { background: #0052a3; }
+    .btn-download { background: #28a745; text-decoration: none; display: inline-block; margin-top: 15px; color: white;}
+    .btn-download:hover { background: #218838; color: white; }
+
+    /* Alerts */
+    .alert { padding: 12px; border-radius: 4px; margin-bottom: 20px; font-weight: bold; }
+    .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+
+    /* Table Styling */
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f8f9fa; }
+    tr:nth-child(even) { background-color: #fdfdfd; }
+  </style>
+</head>
+<body>
+
+  <!-- SAFETY AGREEMENT FORM SECTION -->
+  <div class="container">
+    <h2>🧪 Chemistry Lab Safety Training Agreement & Compliance Form</h2>
+    <p>Please read, fill out, and submit this safety form before semester first day of lab class begin.</p>
+
+    <!-- Flash message alerts -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/submit-safety" method="POST">
+      <h3>1. Faculty/Staff/Researcher/Work study details</h3>
+      <div class="form-group">
+        <label for="student_name">Full Name</label>
+        <input type="text" id="student_name" name="student_name" required>
+      </div>
+      <div class="form-group">
+        <label for="student_id">Faculty/Staff/Student ID Number</label>
+        <input type="text" id="student_id" name="student_id" required>
+      </div>
+      <div class="form-group">
+        <label for="course_section">Course & Section or Research area (e.g., CHEM 113 - Sec 11NS)</label>
+        <input type="text" id="course_section" name="course_section" required>
+      </div>
+      <div class="form-group">
+        <label for="semester">Semester Name (e.g., FA2026)</label>
+        <input type="text" id="semester" name="semester" required>
+      </div>
+      <div class="form-group">
+        <label for="osha_cert_expiry">OSHA Personal Protective Equipment CITI training Certificate Expire Date (e.g., MM/DD/YYYY)</label>
+        <input type="text" id="osha_cert_expiry" name="osha_cert_expiry" required>
+      </div>
+      <div class="form-group">
+        <label for="hazcom_cert_expiry">Hazard Communication CITI training Certificate Expire Date (e.g., MM/DD/YYYY)</label>
+        <input type="text" id="hazcom_cert_expiry" name="hazcom_cert_expiry" required>
+      </div>
+      <div class="form-group">
+        <label for="chem_safety_expiry">Lab Chemical Safety CITI training Certificate Expire Date (e.g., MM/DD/YYYY)</label>
+        <input type="text" id="chem_safety_expiry" name="chem_safety_expiry" required>
+      </div>
+
+      <h3>2. Lab Safety Training Acknowledgment</h3>
+      <p>Check each box to confirm you understand and agree to the Lab Safety Training:</p>
+      <div class="checkbox-group">
+        <input type="checkbox" id="rule1" name="rule1" value="yes">
+        <label for="rule1">My OSHA Personal Protective Equipment CITI program course certificate is currently up to date and valid for more than three months.</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="rule2" name="rule2" value="yes">
+        <label for="rule2">My Hazard Communication CITI program course certificate is currently up to date and valid for more than three months.</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="rule3" name="rule3" value="yes">
+        <label for="rule3">My Lab Chemical Safety CITI program course certificate is currently up to date and valid for more than three months.</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="rule4" name="rule4" value="yes">
+        <label for="rule4">I will dispose of chemical waste strictly according to the SDS/CHP.</label>
+      </div>
+
+      <h3>3. Safety Quiz</h3>
+      <p><strong>Where Safety Data Sheets (SDS) and the Chemical Hygiene Plan (CHP) physical copy can be found in the DANA hall of science Chemistry area?</strong></p>
+      <div class="radio-group">
+        <label><input type="radio" name="quiz_ans" value="inside the chemical sotrage room"> inside the chemical sotrage room</label>
+        <label><input type="radio" name="quiz_ans" value="{{ correct_answer }}"> {{ correct_answer }}</label>
+        <label><input type="radio" name="quiz_ans" value="I don't have any idea about it"> I don't have any idea about it</label>
+      </div>
+
+      <h3>4. Certification and Signature</h3>
+      <div class="form-group">
+        <label for="signature">Type your full legal name as your electronic signature:</label>
+        <input type="text" id="signature" name="signature" required>
+      </div>
+
+      <button type="submit" class="btn">Submit Safety Form</button>
+    </form>
+  </div>
+
+  <!-- ADMIN PORTAL SECTION -->
+  <div class="container" style="background: #fafafa; border: 1px dashed #ccc;">
+    <h2>🔐 Admin Portal</h2>
+    <form action="/" method="GET">
+      <div class="form-group">
+        <label for="admin_password">Enter Admin Password</label>
+        <input type="password" id="admin_password" name="password" value="{{ current_password }}">
+      </div>
+      <button type="submit" class="btn" style="background: #555;">Access Portal</button>
+    </form>
+
+    {% if password_entered %}
+      {% if password_correct %}
+        <h3>📋 Submitted Faculty/Staff/Student Records</h3>
+        <p><strong>Total Submissions Found:</strong> {{ records|length }}</p>
+
+        <!-- Live Search Filter Box -->
+        <form action="/" method="GET" style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <input type="hidden" name="password" value="{{ current_password }}">
+          <input type="text" name="search" placeholder="🔍 Search by Name or ID..." value="{{ search_query }}">
+          <button type="submit" class="btn" style="background:#6c757d;">Search</button>
+        </form>
+
+        {% if records|length > 0 %}
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>ID</th>
+                  <th>Course/Area</th>
+                  <th>Semester</th>
+                  <th>OSHA Expire</th>
+                  <th>HazCom Expire</th>
+                  <th>Chem Safety Expire</th>
+                  <th>Date Submitted</th>
+                  <th>Signature</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in records %}
+                <tr>
+                  <td>{{ row.Name }}</td>
+                  <td>{{ row.ID }}</td>
+                  <td>{{ row.Course_Section }}</td>
+                  <td>{{ row.Semester }}</td>
+                  <td>{{ row.OSHA_Expiry }}</td>
+                  <td>{{ row.HazCom_Expiry }}</td>
+                  <td>{{ row.Chem_Safety_Expiry }}</td>
+                  <td>{{ row.Date }}</td>
+                  <td>{{ row.Signature }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <a href="/download-csv" class="btn btn-download">📥 Download Records as CSV</a>
+        {% else %}
+          <p style="color: #666;">No matches found or no records available.</p>
+        {% endif %}
+      {% else %}
+        <div class="alert alert-error" style="margin-top:15px;">Incorrect admin password.</div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+</body>
+</html>
+
